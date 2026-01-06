@@ -1,0 +1,19 @@
+# Environment variables
+.env
+
+# Flask instance & DB
+instance/
+*.db
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Logs
+*.log
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

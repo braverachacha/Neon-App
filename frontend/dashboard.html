@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NeonApp | Dashboard</title>
+  <link rel="stylesheet" href="./styles/dashboard.css" />
+</head>
+<body>
+
+  <!-- PARTICLE BACKGROUND -->
+  <canvas id="particles"></canvas>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar" id="sidebar">
+    <h2 class="logo">⚡ NeonApp</h2>
+    <ul>
+      <li><a href="#">🏠 Dashboard</a></li>
+      <li><a href="#analytics">📊 Analytics</a></li>
+      <li><a href="#messages">💬 Messages</a></li>
+      <li><a href="#settings">⚙ Settings</a></li>
+      <li><a href="#">🚪 Logout</a></li>
+    </ul>
+  </aside>
+
+  <!-- MAIN CONTENT -->
+  <div class="main-content">
+    <!-- TOP NAVBAR -->
+    <nav class="topnav">
+      <div class="menu-toggle" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <h1>Dashboard</h1>
+    </nav>
+
+    <!-- DASHBOARD CARDS -->
+    <section class="cards">
+      <div class="card">
+        <h3>Users</h3>
+        <p>1,245</p>
+      </div>
+      <div class="card">
+        <h3>Messages</h3>
+        <p>312</p>
+      </div>
+      <div class="card">
+        <h3>Performance</h3>
+        <p>87%</p>
+      </div>
+      <div class="card">
+        <h3>Revenue</h3>
+        <p>$5,400</p>
+      </div>
+    </section>
+
+    <!-- ANALYTICS CHARTS -->
+    <section class="analytics" id="analytics">
+      <h2>Analytics</h2>
+      <div class="charts">
+        <canvas id="chart1"></canvas>
+        <canvas id="chart2"></canvas>
+      </div>
+    </section>
+
+    <!-- MESSAGES -->
+    <section class="messages" id="messages">
+      <h2>Recent Messages</h2>
+      <div class="message-list">
+        <div class="message"><strong>John:</strong> Hello, how’s your project?</div>
+        <div class="message"><strong>Lisa:</strong> Can we schedule a meeting?</div>
+        <div class="message"><strong>Mark:</strong> The dashboard looks amazing!</div>
+      </div>
+    </section>
+
+    <!-- SETTINGS -->
+    <section class="settings" id="settings">
+      <h2>Settings</h2>
+      <p>Settings content goes here. You can add toggles, inputs, etc.</p>
+    </section>
+  </div>
+
+  <!-- CHART.JS CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- SHARED JS -->
+  <script src="./scripts/home.js"></script>
+  <script>
+    // Example charts
+    const ctx1 = document.getElementById('chart1').getContext('2d');
+    const chart1 = new Chart(ctx1, {
+      type: 'line',
+      data: {
+        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+        datasets: [{
+          label: 'Users',
+          data: [120, 200, 150, 300, 250, 400],
+          borderColor: '#00fff7',
+          backgroundColor: 'rgba(0,255,247,0.2)',
+          tension:0.4
+        }]
+      },
+      options:{ responsive:true, plugins:{ legend:{labels:{color:'#e5e5e5'}}}, scales:{ x:{ ticks:{color:'#e5e5e5'} }, y:{ ticks:{color:'#e5e5e5'} } } }
+    });
+
+    const ctx2 = document.getElementById('chart2').getContext('2d');
+    const chart2 = new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: ['Mon','Tue','Wed','Thu','Fri','Sat'],
+        datasets: [{
+          label:'Revenue',
+          data:[500,700,400,900,600,1100],
+          backgroundColor:'rgba(0,255,247,0.6)',
+          borderColor:'#00fff7',
+          borderWidth:1
+        }]
+      },
+      options:{ responsive:true, plugins:{ legend:{labels:{color:'#e5e5e5'}}}, scales:{ x:{ ticks:{color:'#e5e5e5'} }, y:{ ticks:{color:'#e5e5e5'} } } }
+    });
+  </script>
+  <script type="module" src="/scripts/home.js"></script>
+  <script type="module" src="./scripts/authGuard.js"></script>
+</body>
+</html>

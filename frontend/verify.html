@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/verify.css">
+  <title>Email Verification</title>
+</head>
+<body>
+  <div class="container" id="container">
+    
+    <!-- Loading State -->
+    <div id="loading" class="state">
+      <div class="spinner"></div>
+      <h1>Verifying...</h1>
+      <p>Please wait while we verify your email address.</p>
+    </div>
+
+    <!-- Success State -->
+    <div id="success" class="state" style="display: none;">
+      <h1>✅ Email Verified!</h1>
+      <p>Your Neon App account has been successfully verified.</p>
+      <a href="/login.html" class="btn">Go to Login</a>
+    </div>
+
+    <!-- Token Expired State -->
+    <div id="expired" class="state" style="display: none;">
+      <h1>⏳ Token Expired</h1>
+      <p>Your verification link has expired. Please request a new verification email.</p>
+      <a href="/login.html" class="btn">Go to Login</a>
+    </div>
+
+    <!-- Invalid Token State -->
+    <div id="invalid" class="state" style="display: none;">
+      <h1>❌ Invalid Token</h1>
+      <p>The verification link is invalid. Please make sure you used the correct link.</p>
+      <a href="/login.html" class="btn">Go to Login</a>
+    </div>
+
+    <!-- Error State -->
+    <div id="error" class="state" style="display: none;">
+      <h1>❌ Verification Failed</h1>
+      <p id="error-message">An error occurred during verification.</p>
+      <a href="/register.html" class="btn">Back to Register</a>
+    </div>
+
+  </div>
+
+  <script type="module" src="scripts/verify.js"></script>
+</body>
+</html>

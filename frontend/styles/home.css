@@ -1,0 +1,262 @@
+/* =====================
+   RESET & BASE
+===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: radial-gradient(circle at top, #0f2027, #000);
+  color: #e5e5e5;
+  min-height: 100vh;
+}
+
+/* =====================
+   PARTICLES
+===================== */
+#particles {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+}
+
+/* =====================
+   NAVBAR
+===================== */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.2rem 2rem;
+  border-bottom: 1px solid rgba(0, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.logo {
+  color: #00fff7;
+  text-shadow: 0 0 12px rgba(0, 255, 247, 0.7);
+}
+
+.nav-links {
+  list-style: none;
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #e5e5e5;
+  transition: 0.3s;
+}
+
+.nav-links a:hover {
+  color: #00fff7;
+  text-shadow: 0 0 10px #00fff7;
+}
+
+.nav-btn {
+  padding: 0.4rem 0.9rem;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #00fff7, #00b3ff);
+  color: #001 !important;
+  font-weight: 600;
+}
+
+/* =====================
+   HAMBURGER
+===================== */
+.menu-toggle {
+  width: 30px;
+  height: 22px;
+  display: none;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.menu-toggle span {
+  height: 3px;
+  background: #00fff7;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 255, 247, 0.8);
+  transition: 0.35s;
+}
+
+.menu-toggle.active span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.menu-toggle.active span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* =====================
+   HERO
+===================== */
+.hero {
+  text-align: center;
+  padding: 5rem 1.5rem;
+}
+
+.hero h1 {
+  font-size: 3rem;
+}
+
+.hero span {
+  color: #00fff7;
+  text-shadow: 0 0 25px rgba(0, 255, 247, 0.8);
+}
+
+.hero p {
+  max-width: 600px;
+  margin: 1.5rem auto 2.5rem;
+  color: #cfd8dc;
+}
+
+/* =====================
+   BUTTONS
+===================== */
+.hero-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1.2rem;
+}
+
+.btn {
+  padding: 0.85rem 1.5rem;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: 0.35s;
+}
+
+.btn.primary {
+  background: linear-gradient(135deg, #00fff7, #00b3ff);
+  color: #001;
+  box-shadow: 0 0 20px rgba(0, 255, 247, 0.6);
+}
+
+.btn.secondary {
+  border: 1px solid #00fff7;
+  color: #00fff7;
+}
+
+.btn:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 0 35px rgba(0, 255, 247, 0.9);
+}
+
+/* =====================
+   FEATURES
+===================== */
+.features {
+  padding: 4rem 2rem;
+}
+
+.features h2,
+.about h2 {
+  text-align: center;
+  margin-bottom: 2.5rem;
+  color: #00fff7;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: auto;
+}
+
+.feature-card {
+  background: rgba(15, 15, 20, 0.75);
+  padding: 1.8rem;
+  border-radius: 16px;
+  border: 1px solid rgba(0, 255, 255, 0.15);
+  transition: 0.35s;
+}
+
+.feature-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 35px rgba(0, 255, 255, 0.4);
+}
+
+/* =====================
+   ABOUT
+===================== */
+.about {
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.about p {
+  max-width: 700px;
+  margin: auto;
+  color: #cfd8dc;
+  line-height: 1.6;
+}
+
+/* =====================
+   FOOTER
+===================== */
+.footer {
+  padding: 2rem;
+  border-top: 1px solid rgba(0, 255, 255, 0.15);
+  text-align: center;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: #9aa;
+  transition: 0.3s;
+}
+
+.footer-links a:hover {
+  color: #00fff7;
+  text-shadow: 0 0 10px #00fff7;
+}
+
+.footer-text {
+  font-size: 0.85rem;
+  color: #9aa;
+}
+
+/* =====================
+   MOBILE NAV
+===================== */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: flex;
+  }
+
+  .nav-links {
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    flex-direction: column;
+    background: rgba(15, 15, 20, 0.95);
+    padding: 1rem;
+    border-radius: 14px;
+    display: none;
+    gap: 1rem;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+}

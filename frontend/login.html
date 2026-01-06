@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./styles/style.css">
+  <title>Login</title>
+</head>
+<body>
+
+  <div class="container reg-container">
+    <div class="wrapper">
+      <h1 class="login_reg_header">Login</h1>
+      <div class="" id="message">
+        
+      </div>
+
+      <div>
+
+        <!-- EMAIL -->
+        <div class="input_section floating">
+          <input class="input" id="email" type="email" required>
+          <label for="email">Email address</label>
+        </div>
+
+        <!-- PASSWORD -->
+        <div class="input_section floating">
+          <input class="input" id="password" type="password" required>
+          <label for="password">Password</label>
+        </div>
+
+        <div class="rem_forgot">
+          <div>
+            <input type="checkbox">
+            <label>Remember me</label>
+          </div>
+          <a href="#">Forgot password</a>
+        </div>
+
+        <div class="submit_section">
+          <button class="submit_button js-submit-button">Submit</button>
+        </div>
+
+        <p class="create-login">
+          Don't have an account?
+          <a href="/register.html">Create account</a>
+        </p>
+
+      </div>
+    </div>
+  </div>
+
+  <script type="module" src="scripts/login.js"></script>
+</body>
+</html>

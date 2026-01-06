@@ -1,0 +1,271 @@
+/* =====================
+   RESET & BASE
+===================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background: radial-gradient(circle at top, #0f2027, #000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #e5e5e5;
+}
+
+/* =====================
+   CONTAINER
+===================== */
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 380px;
+  padding: 2.2rem;
+  border-radius: 16px;
+  background: rgba(15, 15, 20, 0.75);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 255, 255, 0.15);
+  box-shadow:
+    0 0 25px rgba(0, 255, 255, 0.15),
+    inset 0 0 25px rgba(0, 255, 255, 0.05);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.wrapper:hover {
+  transform: translateY(-6px);
+  box-shadow:
+    0 0 35px rgba(0, 255, 255, 0.35),
+    0 0 80px rgba(0, 255, 255, 0.15);
+}
+
+/* =====================
+   HEADER
+===================== */
+.login_reg_header {
+  text-align: center;
+  margin-bottom: 1.8rem;
+  font-size: 2rem;
+  letter-spacing: 2px;
+  color: #00fff7;
+  text-shadow:
+    0 0 10px rgba(0, 255, 247, 0.7),
+    0 0 25px rgba(0, 255, 247, 0.4);
+}
+
+/* =====================
+   INPUTS
+===================== */
+.input_section {
+  margin-bottom: 1.1rem;
+}
+
+.input {
+  width: 100%;
+  padding: 0.85rem 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(0, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  font-size: 0.95rem;
+  outline: none;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+}
+
+.input::placeholder {
+  color: #9aa;
+}
+
+.input:focus {
+  border-color: #00fff7;
+  box-shadow:
+    0 0 12px rgba(0, 255, 247, 0.6),
+    inset 0 0 8px rgba(0, 255, 247, 0.15);
+  transform: scale(1.02);
+}
+
+/* =====================
+   REMEMBER / FORGOT
+===================== */
+.rem_forgot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  margin-bottom: 1.5rem;
+}
+
+.rem_forgot a {
+  color: #00fff7;
+  text-decoration: none;
+  transition: text-shadow 0.3s ease;
+}
+
+.rem_forgot a:hover {
+  text-shadow: 0 0 10px #00fff7;
+}
+
+/* =====================
+   BUTTON
+===================== */
+.submit_section {
+  margin-top: 1rem;
+}
+
+.submit_button {
+  width: 100%;
+  padding: 0.85rem;
+  border-radius: 12px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  color: #001;
+  background: linear-gradient(135deg, #00fff7, #00b3ff);
+  box-shadow:
+    0 0 15px rgba(0, 255, 247, 0.6),
+    0 0 40px rgba(0, 179, 255, 0.3);
+  transition: all 0.35s ease;
+}
+
+.submit_button:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow:
+    0 0 25px rgba(0, 255, 247, 0.9),
+    0 0 70px rgba(0, 179, 255, 0.6);
+}
+
+.submit_button:active {
+  transform: scale(0.98);
+}
+
+/* =====================
+   LINKS BELOW FORM
+===================== */
+.create-login {
+  margin-top: 1.5rem;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.create-login a {
+  color: #00fff7;
+  text-decoration: none;
+  font-weight: 600;
+  transition: text-shadow 0.3s ease;
+}
+
+.create-login a:hover {
+  text-shadow: 0 0 12px #00fff7;
+}
+
+/* =====================
+   FLOATING LABELS
+===================== */
+.input_section.floating {
+  position: relative;
+}
+
+.input_section.floating label {
+  position: absolute;
+  top: 50%;
+  left: 14px;
+  transform: translateY(-50%);
+  color: #9aa;
+  font-size: 0.9rem;
+  pointer-events: none;
+  transition: all 0.35s ease;
+  background: rgba(15, 15, 20, 0.8);
+  padding: 0 6px;
+}
+
+/* Move label on focus or when input has value */
+.input_section.floating input:focus + label,
+.input_section.floating input:valid + label {
+  top: -2px;
+  font-size: 0.75rem;
+  color: #00fff7;
+  /* background: none; */
+  border: 1px solid rgba(0, 255, 247, 0.8);
+  border-radius: 13px;
+  text-shadow: 0 0 8px rgba(0, 255, 247, 0.8);
+}
+
+/* Extra glow when active */
+.input_section.floating input:focus + label {
+  text-shadow:
+    0 0 10px rgba(0, 255, 247, 1),
+    0 0 25px rgba(0, 255, 247, 0.6);
+}
+
+.submit_button {
+  position: relative;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  color: #00fff7;
+  background: rgba(15,15,20,0.8);
+  border: 1px solid #00fff7;
+  border-radius: 12px;
+  cursor: pointer;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.submit_button:hover {
+  background: rgba(0,255,247,0.1);
+  box-shadow: 0 0 15px #00fff7;
+}
+
+.message {
+  padding: 12px;
+  margin-bottom: 16px;
+  border-radius: 6px;
+  font-size: 0.9rem;
+}
+
+.message.success {
+  background: #e6fffa;
+  color: #065f46;
+  border: 1px solid #10b981;
+}
+
+.message.error {
+  background: #ffe4e6;
+  color: #7f1d1d;
+  border: 1px solid #ef4444;
+}
+
+.hidden {
+  display: none;
+}
+
+/* Neon spinning loader */
+@keyframes spin {
+  0% { transform: rotate(0deg);}
+  100% { transform: rotate(360deg);}
+}
+
+.submit_button.loading::after {
+  content: '';
+  position: absolute;
+  right: 16px;
+  top: 45%;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  border: 2px solid #00fff7;
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
