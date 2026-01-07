@@ -1,0 +1,105 @@
+import { dataSubmit } from './dataFetch.js';
+import { showMessage } from './uiMessage.js';
+
+const sendBtn = document.getElementById('send-reset-link');
+const emailInput = document.getElementById('reset-email');
+const msg = document.getElementById('reset-msg');
+const newPassSection = document.getElementById('new-pass-section');
+const resetSubmit = document.getElementById('reset-submit');
+const newPassInput = document.getElementById('new-pass');
+const resetResult = document.getElementById('reset-result');
+
+const urlParams = new URLSearchParams(window.location.search);
+let token = urlParams.get('token');
+
+// Helper: remove token from URL
+function removeTokenFromURL() {
+  const url = new URL(window.location);
+  url.searchParams.delete('token');
+  window.history.replaceState({}, document.title, url.toString());
+}
+
+// If token exists in URL, show password reset section
+if (token) {
+  newPassSection.style.display = 'block';
+  emailInput.parentElement.style.display = 'none';
+  sendBtn.style.display = 'none';
+}
+
+// Send reset link
+sendBtn.addEventListener('click', async () => {
+  const email = emailInput.value;
+  
+  if (!email) {
+    showMessage(msg, 'Please enter your email address', 'error');
+    return;
+  }
+
+  sendBtn.disabled = true;
+  sendBtn.textContent = 'Sending...';
+
+  try {
+    const res = await dataSubmit(
+      { email },
+      'http://127.0.0.1:3000/forgot-password'
+    );
+
+    if (!res.success) {
+      showMessage(msg, res.data?.msg || 'Failed to send reset link', 'error');
+      return;
+    }
+
+    showMessage(msg, res.data.msg);
+    emailInput.value = '';
+  } catch (err) {
+    showMessage(msg, 'Network error - please try again', 'error');
+  } finally {
+    sendBtn.disabled = false;
+    sendBtn.textContent = 'Send Reset Link';
+  }
+});
+
+// Reset password with token
+resetSubmit.addEventListener('click', async () => {
+  const password = newPassInput.value;
+  
+  if (!password) {
+    showMessage(resetResult, 'Please enter a new password', 'error');
+    return;
+  }
+
+  if (password.length < 8) {
+    showMessage(resetResult, 'Password must be at least 8 characters', 'error');
+    return;
+  }
+
+  resetSubmit.disabled = true;
+  resetSubmit.textContent = 'Resetting...';
+
+  try {
+    const res = await dataSubmit(
+      { token, password },
+      'http://127.0.0.1:3000/reset-password'
+    );
+
+    if (!res.success) {
+      showMessage(resetResult, res.data?.msg || 'Failed to reset password', 'error');
+      return;
+    }
+
+    showMessage(resetResult, res.data.msg);
+    newPassInput.value = '';
+
+    // Remove token from URL so it cannot be reused
+    removeTokenFromURL();
+    token = null; // clear local variable
+
+    // Redirect after 2 seconds
+    setTimeout(() => window.location.replace('login.html'), 2000);
+  } catch (err) {
+    showMessage(resetResult, 'Network error - please try again', 'error');
+  } finally {
+    resetSubmit.disabled = false;
+    resetSubmit.textContent = 'Reset Password';
+  }
+});

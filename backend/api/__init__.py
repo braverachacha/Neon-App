@@ -4,8 +4,10 @@ from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
 from flask_cors import CORS
 from flask_mail import Mail
-import os
 
+from sqlalchemy_utils import database_exists, create_database
+
+import os
 
 db = SQLAlchemy()
 mail = Mail()
@@ -44,5 +46,14 @@ def create_app():
     from .auth import auth
     
     app.register_blueprint(auth, url_prefix='')
+    
+    init_db(app)
 
     return app
+    
+def init_db(app):
+    """Create MySQL database + tables once if not existing"""
+    with app.app_context():
+        if not database_exists(db.engine.url):
+            create_database(db.engine.url)
+        db.create_all()

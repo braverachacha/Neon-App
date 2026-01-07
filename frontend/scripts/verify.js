@@ -27,6 +27,8 @@ async function verifyEmail(token) {
 
     if (data.success) {
       showState('success');
+      removeTokenFromURL(); // remove token from URL
+      setTimeout(() => window.location.replace('login.html'), 2000);
     } else {
       if (data.error === 'expired') {
         showState('expired');
@@ -35,11 +37,13 @@ async function verifyEmail(token) {
       } else {
         showState('error');
         errorMessage.textContent = data.msg || 'Verification failed.';
+        error.style.display = 'block';
       }
     }
   } catch (err) {
     showState('error');
     errorMessage.textContent = 'Network error. Please try again later.';
+    error.style.display = 'block';
   }
 }
 
