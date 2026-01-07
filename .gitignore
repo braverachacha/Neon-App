@@ -1,19 +1,25 @@
-# Environment variables
-.env
-
-# Flask instance & DB
-instance/
-*.db
-
-# Python cache
+# Python
 __pycache__/
 *.py[cod]
-
-# Logs
+*.sqlite3
 *.log
 
-# OS / Editor
-.DS_Store
-Thumbs.db
+# Virtual environments
+env/
+venv/
+ENV/
+.venv/
+
+# Flask
+instance/
+*.env
+
+# VSCode / IDE
 .vscode/
 .idea/
+*.sublime-project
+*.sublime-workspace
+
+# OS files
+.DS_Store
+Thumbs.db
