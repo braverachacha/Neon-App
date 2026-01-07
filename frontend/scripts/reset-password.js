@@ -10,14 +10,7 @@ const newPassInput = document.getElementById('new-pass');
 const resetResult = document.getElementById('reset-result');
 
 const urlParams = new URLSearchParams(window.location.search);
-let token = urlParams.get('token');
-
-// Helper: remove token from URL
-function removeTokenFromURL() {
-  const url = new URL(window.location);
-  url.searchParams.delete('token');
-  window.history.replaceState({}, document.title, url.toString());
-}
+const token = urlParams.get('token');
 
 // If token exists in URL, show password reset section
 if (token) {
@@ -89,12 +82,7 @@ resetSubmit.addEventListener('click', async () => {
 
     showMessage(resetResult, res.data.msg);
     newPassInput.value = '';
-
-    // Remove token from URL so it cannot be reused
-    removeTokenFromURL();
-    token = null; // clear local variable
-
-    // Redirect after 2 seconds
+    
     setTimeout(() => window.location.replace('login.html'), 2000);
   } catch (err) {
     showMessage(resetResult, 'Network error - please try again', 'error');

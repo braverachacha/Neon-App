@@ -2,8 +2,6 @@ from flask import Blueprint, jsonify, request, url_for, current_app, send_from_d
 from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
-from datetime import datetime, timedelta
-import secrets
 
 import requests
 
@@ -64,73 +62,48 @@ def register():
     send_email_verification(new_user.email, link, new_user.username)
     return jsonify({'msg':'Account created successfully! Please check your email to verify your account.'}), 201
 
-
-@auth.route('/forgot-password', methods=['POST'])
+@auth.route('/forgot-password', methods=['POST'])  
 def forgot_password():
-    data = request.get_json()
-    email = data.get('email')
-
-    if not email:
-        return jsonify({'msg': 'Email is required'}), 400
-
-    user = User.query.filter_by(email=email).first()
-    if not user:
-        return jsonify({'msg': 'User not found'}), 404
-
-    # Create a token valid for 5 minutes (300 sec)
-    serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
-    token = serializer.dumps(email, salt='password-reset')
-
-    # Store token in DB for single-use
-    user.reset_token = token
-    db.session.commit()
-
-    reset_link = f"{FRONTEND_LINK}/reset.html?token={token}"
-
-    # Send email
-    msg = Message(
-        subject="NeonApp Password Reset",
-        recipients=[email],
-        body=f"Reset your password using this link (expires in 5 minutes): {reset_link}"
-    )
-    mail.send(msg)
-
-    return jsonify({'msg': 'Reset link sent! Check your email.'}), 200
-
-# Reset password
+  data = request.get_json()
+  email = data.get('email')
+  
+  user = User.query.filter_by(email=email).first()
+  if not user:
+    return jsonify({'msg':'Email not found'}), 404
+    
+  token = generate_email_token(user.email)
+  frontend_url = current_app.config['FRONTEND_LINK']
+  reset_link = f"{frontend_url}/forgot-password.html?token={token}"
+  send_password_reset_email(user.email, reset_link)
+  return jsonify({'msg': 'Password reset link sent to your email'}), 200
+  
 @auth.route('/reset-password', methods=['POST'])
 def reset_password():
     data = request.get_json()
     token = data.get('token')
     new_password = data.get('password')
-
+    
     if not token or not new_password:
-        return jsonify({'msg': 'Missing token or password'}), 400
-
+        return jsonify({'msg':'Missing token or password'}), 400
+    
+    # Verify the token
     serializer = URLSafeTimedSerializer(current_app.config['SECRET_KEY'])
-
     try:
-        # Verify token is valid and not older than 5 minutes
-        email = serializer.loads(token, salt='password-reset', max_age=300)
+        email = serializer.loads(token, salt='email-confirm', max_age=900)  # 15 min expiry
     except SignatureExpired:
-        return jsonify({'msg': 'Reset link expired', 'error': 'expired'}), 400
+        return jsonify({'msg':'Reset link expired', 'error':'expired'}), 400
     except BadSignature:
-        return jsonify({'msg': 'Invalid reset link', 'error': 'invalid'}), 400
-
+        return jsonify({'msg':'Invalid reset link', 'error':'invalid'}), 400
+    
+    # Find user and update password
     user = User.query.filter_by(email=email).first()
     if not user:
-        return jsonify({'msg': 'User not found', 'error': 'invalid'}), 404
-
-    # Check token matches stored token
-    if user.reset_token != token:
-        return jsonify({'msg': 'Reset link already used or invalid', 'error': 'invalid'}), 400
-
-    # Update password and invalidate token
+        return jsonify({'msg':'User not found', 'error':'invalid'}), 404
+    
     user.set_password(new_password)
-    user.reset_token = None
     db.session.commit()
-
-    return jsonify({'msg': 'Password reset successful! Redirecting to login...'}), 200
+    
+    return jsonify({'msg':'Password reset successful! Redirecting to login...'}), 200
   
   
 
