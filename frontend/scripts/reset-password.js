@@ -1,5 +1,6 @@
 import { dataSubmit } from './dataFetch.js';
 import { showMessage } from './uiMessage.js';
+import { API_URL } from './config.js';
 
 const sendBtn = document.getElementById('send-reset-link');
 const emailInput = document.getElementById('reset-email');
@@ -22,7 +23,7 @@ if (token) {
 // Send reset link
 sendBtn.addEventListener('click', async () => {
   const email = emailInput.value;
-  
+
   if (!email) {
     showMessage(msg, 'Please enter your email address', 'error');
     return;
@@ -34,7 +35,7 @@ sendBtn.addEventListener('click', async () => {
   try {
     const res = await dataSubmit(
       { email },
-      'http://127.0.0.1:3000/forgot-password'
+      `${API_URL}/forgot-password`
     );
 
     if (!res.success) {
@@ -55,7 +56,7 @@ sendBtn.addEventListener('click', async () => {
 // Reset password with token
 resetSubmit.addEventListener('click', async () => {
   const password = newPassInput.value;
-  
+
   if (!password) {
     showMessage(resetResult, 'Please enter a new password', 'error');
     return;
@@ -72,7 +73,7 @@ resetSubmit.addEventListener('click', async () => {
   try {
     const res = await dataSubmit(
       { token, password },
-      'http://127.0.0.1:3000/reset-password'
+      `${API_URL}/reset-password`
     );
 
     if (!res.success) {
@@ -82,7 +83,7 @@ resetSubmit.addEventListener('click', async () => {
 
     showMessage(resetResult, res.data.msg);
     newPassInput.value = '';
-    
+
     setTimeout(() => window.location.replace('login.html'), 2000);
   } catch (err) {
     showMessage(resetResult, 'Network error - please try again', 'error');

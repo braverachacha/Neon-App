@@ -1,3 +1,5 @@
+import { API_URL } from './config.js';
+
 (async () => {
   const token = localStorage.getItem('access_token');
 
@@ -9,7 +11,7 @@
   document.body.style.visibility = 'hidden';
 
   try {
-    const res = await fetch('http://127.0.0.1:3000/protected-route', {
+    const res = await fetch(`${API_URL}/protected-route`, {
       headers: { Authorization: `Bearer ${token}` }
     });
 

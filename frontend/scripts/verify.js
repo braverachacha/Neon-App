@@ -1,3 +1,5 @@
+import { API_URL } from './config.js';
+
 // Get all state elements
 const loading = document.getElementById('loading');
 const success = document.getElementById('success');
@@ -22,7 +24,7 @@ if (!token) {
 
 async function verifyEmail(token) {
   try {
-    const res = await fetch(`http://127.0.0.1:3000/verify-email/${token}`);
+    const res = await fetch(`${API_URL}/verify-email/${token}`);
     const data = await res.json();
 
     if (data.success) {
@@ -53,7 +55,7 @@ function showState(state) {
 
   // Show the requested state
   document.getElementById(state).style.display = 'block';
-  
+
   // Update body class for background color
   document.body.className = state;
 }

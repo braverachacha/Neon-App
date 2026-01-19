@@ -1,7 +1,8 @@
 import { dataSubmit } from './dataFetch.js';
 import { showMessage } from './uiMessage.js';
+import { API_URL } from './config.js';
 
-const btn = document.querySelector('.js-submit-button');  // Changed from '.js-submit'
+const btn = document.querySelector('.js-submit-button');
 const email = document.getElementById('email');
 const password = document.getElementById('password');
 const msgBox = document.getElementById('message');
@@ -18,7 +19,7 @@ btn.addEventListener('click', async () => {
   try {
     const res = await dataSubmit(
       { email: email.value, password: password.value },
-      'http://127.0.0.1:3000/login'
+      `${API_URL}/login`
     );
 
     if (!res.success) {
