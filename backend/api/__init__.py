@@ -44,8 +44,10 @@ def create_app():
     mail.init_app(app)
     
     from .auth import auth
+    from .alive import alive
     
     app.register_blueprint(auth, url_prefix='')
+    app.register_blueprint(alive, url_prefix='')
     
     init_db(app)
 
