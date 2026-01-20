@@ -40,9 +40,19 @@ def register():
     email = response.get('email')
     password = response.get('password')
     
+    # SERVER SIDE VALIDATION
+    if len(username) < 1:
+      return jsonify({'msg':'Username should be greater than 2 characters!'}), 400
+    elif len(email) < 2:
+      return jsonify({'msg':'Email should be greater than 2 characters!'}), 400
+    elif '@'not in email or '.' not in email :
+      return jsonify({'msg':'Enter a valid email!'}), 400
+    elif len(password) < 8:
+      return jsonify({'msg':'Password should be greater than 8 characters!'}), 400
+      
     user = User.query.filter_by(email=email).first()
     if user:
-        return jsonify({'msg':'Email already exists!'}), 400
+        return jsonify({'msg':'Email already exists!'}), 409
     else:
 
         token = generate_email_token()
@@ -59,9 +69,10 @@ def register():
         db.session.add(new_user)
         db.session.commit()
         
-        frontend_url = current_app.config['FRONTEND_LINK'].rstrip('/')
+        frontend_url = current_app.config['FRONTEND_LINK'].strip('/')
         link = f"{frontend_url}/verify.html?token={token}"
-            
+        
+
         send_email_verification(email, link, username)
         return jsonify({'msg':'Account created successfully! Please check your email to verify your account.'}), 201
 
@@ -82,7 +93,7 @@ def forgot_password():
     user.reset_token_used = False
     db.session.commit()
     
-    frontend_url = current_app.config['FRONTEND_LINK'].rstrip('/')
+    frontend_url = current_app.config['FRONTEND_LINK'].strip('/')
     reset_link = f"{frontend_url}/forgot-password.html?token={token}"
     send_password_reset_email(email, reset_link)
     return jsonify({'msg': 'Password reset link sent to your email'}), 200
@@ -95,6 +106,8 @@ def reset_password():
     
     if not token or not new_password:
         return jsonify({'msg':'Missing token or password'}), 400
+    elif len(new_password) < 8:
+      return jsonify({'msg': 'Password should be greater than 8 characters!'}), 400
     
     # Find user by reset token
     user = User.query.filter_by(reset_token=token).first()

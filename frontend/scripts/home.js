@@ -38,6 +38,7 @@ if(navLinks){
     });
   });
 }
+console.log('hello there')
 
 /* PARTICLES BACKGROUND */
 const canvas = document.getElementById("particles");

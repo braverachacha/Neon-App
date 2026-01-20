@@ -57,15 +57,15 @@ sendBtn.addEventListener('click', async () => {
 resetSubmit.addEventListener('click', async () => {
   const password = newPassInput.value;
 
-  if (!password) {
-    showMessage(resetResult, 'Please enter a new password', 'error');
-    return;
-  }
+  // if (!password) {
+  //   showMessage(resetResult, 'Please enter a new password', 'error');
+  //   return;
+  // }
 
-  if (password.length < 8) {
-    showMessage(resetResult, 'Password must be at least 8 characters', 'error');
-    return;
-  }
+  // if (password.length < 8) {
+  //   showMessage(resetResult, 'Password must be at least 8 characters', 'error');
+  //   return;
+  // }
 
   resetSubmit.disabled = true;
   resetSubmit.textContent = 'Resetting...';

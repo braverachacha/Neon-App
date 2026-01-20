@@ -9,8 +9,18 @@ const password = document.getElementById('password');
 const msgBox = document.getElementById('message');
 
 btn.addEventListener('click', async () => {
-  if (!username.value || !email.value || !password.value || password.value.length < 8) {
-    showMessage(msgBox, 'Invalid input - all fields required, password min 8 chars', 'error');
+  if (username.value.length < 3) {
+    showMessage(msgBox, 'Username should be at least 3 characters', 'error');
+    return;
+  }
+  
+  if (email.value.length < 3 || !email.value.includes('@') || !email.value.includes('.')) {
+    showMessage(msgBox, 'Enter a valid email', 'error');
+    return;
+  }
+
+  if (password.value.length < 8) {
+    showMessage(msgBox, 'Password should be at least 8 characters', 'error');
     return;
   }
 
