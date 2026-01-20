@@ -163,36 +163,3 @@ def protected_route():
         'msg': 'Access granted',
         'user': current_user
     }), 200
-
-# Optional: Token cleanup endpoint (could be called by a cron job)
-@auth.route('/cleanup-tokens', methods=['POST'])
-def cleanup_tokens():
-    """Remove expired tokens from database"""
-    now = datetime.utcnow()
-    
-    # Clean expired email verification tokens
-    expired_verify_users = User.query.filter(
-        User.email_token_expiry < now,
-        User.is_verified == False
-    ).all()
-    
-    for user in expired_verify_users:
-        user.email_token = None
-        user.email_token_expiry = None
-    
-    # Clean expired reset tokens
-    expired_reset_users = User.query.filter(
-        User.reset_token_expiry < now,
-        User.reset_token_used == False
-    ).all()
-    
-    for user in expired_reset_users:
-        user.reset_token = None
-        user.reset_token_expiry = None
-        user.reset_token_used = True
-    
-    db.session.commit()
-    
-    return jsonify({
-        'msg': f'Cleaned {len(expired_verify_users)} expired verification tokens and {len(expired_reset_users)} expired reset tokens'
-    }), 200
