@@ -1,6 +1,7 @@
 import { dataSubmit } from './dataFetch.js';
 import { showMessage } from './uiMessage.js';
 import { API_URL } from './config.js';
+import { passwordCheck } from './passwordCheck.js'
 
 const btn = document.querySelector('.js-submit-button');
 const username = document.getElementById('username');
@@ -18,11 +19,11 @@ btn.addEventListener('click', async () => {
     showMessage(msgBox, 'Enter a valid email', 'error');
     return;
   }
-
-  if (password.value.length < 8) {
-    showMessage(msgBox, 'Password should be at least 8 characters', 'error');
-    return;
-  }
+  
+  // const isPasswordVerified = passwordCheck(password.value, msgBox);
+  // if (!isPasswordVerified){
+  //   return
+  // }
 
   btn.disabled = true;
   btn.textContent = 'Creating account...';
@@ -32,6 +33,8 @@ btn.addEventListener('click', async () => {
       { username: username.value, email: email.value, password: password.value },
       `${API_URL}/register`
     );
+    
+    alert(re)
 
     if (!res.success) {
       showMessage(msgBox, res.data?.msg || 'Registration failed', 'error');

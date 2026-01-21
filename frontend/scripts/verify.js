@@ -8,9 +8,13 @@ const invalid = document.getElementById('invalid');
 const error = document.getElementById('error');
 const errorMessage = document.getElementById('error-message');
 
-// Get token from URL
-const urlParams = new URLSearchParams(window.location.search);
-const token = urlParams.get('token');
+// Get token and token_id from URL
+const params = new URLSearchParams(window.location.search);
+const token_id = params.get("token_id");
+const token = params.get("token");
+
+console.log(`token_id: ${token_id}`)
+console.log(`token: ${token}`)
 
 // Set initial state
 document.body.className = 'loading';
@@ -24,7 +28,7 @@ if (!token) {
 
 async function verifyEmail(token) {
   try {
-    const res = await fetch(`${API_URL}/verify-email/${token}`);
+    const res = await fetch(`${API_URL}/verify-email/${token_id}/${token}`);
     const data = await res.json();
 
     if (data.success) {

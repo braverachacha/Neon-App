@@ -112,7 +112,7 @@ def send_email_verification(email, link, username):
     </html>
     """
     
-    mail.send(msg)
+    send_email(msg)
     
     
 def send_password_reset_email(to_email, reset_link):
@@ -145,4 +145,12 @@ def send_password_reset_email(to_email, reset_link):
     </html>
     """
     
+    send_email(msg)
+    
+def send_email(msg):
+  try:
     mail.send(msg)
+  except Exception as e:
+    print(f"[ERROR] Failed to send email: {e}")
+    return False
+  return True

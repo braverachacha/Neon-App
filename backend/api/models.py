@@ -9,10 +9,12 @@ class User(db.Model):
     is_verified = db.Column(db.Boolean, default=False)
     
     # Email verification fields
+    email_token_id = db.Column(db.String(16), index=True)
     email_token = db.Column(db.String(300), nullable=True)
     email_token_expiry = db.Column(db.DateTime, nullable=True)
     
-    # Password reset fields  
+    # Password reset fields 
+    reset_token_id = db.Column(db.String(16), index=True)
     reset_token = db.Column(db.String(300), nullable=True)
     reset_token_expiry = db.Column(db.DateTime, nullable=True)
     reset_token_used = db.Column(db.Boolean, default=False)
@@ -26,7 +28,7 @@ class User(db.Model):
         
     # EMAIL TOKEN HASHING
     def set_email_token(self, email_token):
-        self.password = generate_password_hash(email_token)
+        self.email_token = generate_password_hash(email_token)
         
     def check_email_token(self, email_token):
       if not email_token:

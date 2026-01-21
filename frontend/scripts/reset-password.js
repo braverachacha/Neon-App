@@ -1,6 +1,7 @@
 import { dataSubmit } from './dataFetch.js';
 import { showMessage } from './uiMessage.js';
 import { API_URL } from './config.js';
+import { passwordCheck } from './passwordCheck.js'
 
 const sendBtn = document.getElementById('send-reset-link');
 const emailInput = document.getElementById('reset-email');
@@ -56,16 +57,13 @@ sendBtn.addEventListener('click', async () => {
 // Reset password with token
 resetSubmit.addEventListener('click', async () => {
   const password = newPassInput.value;
+  
+  // check password strength
+  const isPasswordVerified = passwordCheck(password.value, msgBox);
+  if (!isPasswordVerified) {
+    return
+  }
 
-  // if (!password) {
-  //   showMessage(resetResult, 'Please enter a new password', 'error');
-  //   return;
-  // }
-
-  // if (password.length < 8) {
-  //   showMessage(resetResult, 'Password must be at least 8 characters', 'error');
-  //   return;
-  // }
 
   resetSubmit.disabled = true;
   resetSubmit.textContent = 'Resetting...';
