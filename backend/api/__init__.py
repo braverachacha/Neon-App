@@ -57,13 +57,17 @@ def create_app():
     from .register import reg
     from .protected_route import protect
     from .forgot_password import forgot
-    from .login import login
+    from .login import login_bp
     from .reset_password import pass_reset
     from .verify_email import email_app
     
-    app.register_blueprint(alive, url_prefix='')
-    app.register_blueprint(reg, url_prefix='')
-    app.register_blueprint(protect, url_prefix='')
+    app.register_blueprint(alive)
+    app.register_blueprint(reg)
+    app.register_blueprint(protect)
+    app.register_blueprint(forgot)
+    app.register_blueprint(login_bp)
+    app.register_blueprint(pass_reset)
+    app.register_blueprint(email_app)
     
     init_db(app)
 

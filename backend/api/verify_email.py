@@ -6,9 +6,9 @@ from . import db
 
 email_app = Blueprint('email_app', __name__)
 
-@email_app.route('/verify-email')
-def verify_email(token):
-    user = User.query.filter_by(token_id=email_token_id).first()
+@email_app.route('/verify-email/<token_id>/<token>')
+def verify_email(token_id, token):
+    user = User.query.filter_by(email_token_id=token_id).first()
     
     if not user:
         return jsonify({'success': False, 'msg': 'Invalid token', 'error': 'invalid'}), 400

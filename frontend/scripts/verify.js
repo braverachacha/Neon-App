@@ -29,6 +29,8 @@ if (!token) {
 async function verifyEmail(token) {
   try {
     const res = await fetch(`${API_URL}/verify-email/${token_id}/${token}`);
+    
+    console.log(res)
     const data = await res.json();
 
     if (data.success) {
@@ -46,6 +48,7 @@ async function verifyEmail(token) {
   } catch (err) {
     showState('error');
     errorMessage.textContent = 'Network error. Please try again later.';
+    console.log(err)
   }
 }
 
