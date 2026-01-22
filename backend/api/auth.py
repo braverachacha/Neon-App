@@ -1,6 +1,5 @@
-from flask import Blueprint, jsonify, request, url_for, current_app, send_from_directory
-from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required
-from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask import Blueprint, jsonify, request, current_app
+from flask_jwt_extended import create_access_token, create_refresh_token, jwt_required,get_jwt_identity
 from itsdangerous import URLSafeTimedSerializer, SignatureExpired, BadSignature
 from datetime import datetime, timedelta
 import secrets

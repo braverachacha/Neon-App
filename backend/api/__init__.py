@@ -53,11 +53,17 @@ def create_app():
     JWTManager(app)
     mail.init_app(app)
     
-    from .auth import auth
     from .alive import alive
+    from .register import reg
+    from .protected_route import protect
+    from .forgot_password import forgot
+    from .login import login
+    from .reset_password import pass_reset
+    from .verify_email import email_app
     
-    app.register_blueprint(auth, url_prefix='')
     app.register_blueprint(alive, url_prefix='')
+    app.register_blueprint(reg, url_prefix='')
+    app.register_blueprint(protect, url_prefix='')
     
     init_db(app)
 

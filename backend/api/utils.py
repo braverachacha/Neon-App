@@ -111,8 +111,9 @@ def send_email_verification(email, link, username):
     </body>
     </html>
     """
-    
-    send_email(msg)
+    print(f'Sending email to {username}')
+    result = send_email(msg)
+    return result
     
     
 def send_password_reset_email(to_email, reset_link):
@@ -145,7 +146,9 @@ def send_password_reset_email(to_email, reset_link):
     </html>
     """
     
-    send_email(msg)
+    result = send_email(msg)
+    
+    return result
     
 def send_email(msg):
   try:
