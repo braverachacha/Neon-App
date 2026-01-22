@@ -14,7 +14,6 @@ export const passwordCheck = (password, msgBox) => {
     showMessage(msgBox, 'Password should contain at least one special character.', 'error');
     return false;
   } else {
-    console.log('Password verified successfully!');
     return true
   }
 };

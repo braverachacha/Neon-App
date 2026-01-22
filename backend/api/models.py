@@ -31,10 +31,11 @@ class User(db.Model):
         self.email_token = generate_password_hash(email_token)
         
     def check_email_token(self, email_token):
-      if not email_token:
+      if not email_token or not self.email_token:
         return False
       return check_password_hash(self.email_token, email_token)
         
+    # RESET TOKEN HASHING
     def set_reset_token(self, reset_token):
       self.reset_token = generate_password_hash(reset_token)
       

@@ -13,6 +13,8 @@ const resetResult = document.getElementById('reset-result');
 
 const urlParams = new URLSearchParams(window.location.search);
 const token = urlParams.get('token');
+const msgBox = document.getElementById('reset-result');
+console.log(msgBox);
 
 // If token exists in URL, show password reset section
 if (token) {
@@ -59,7 +61,7 @@ resetSubmit.addEventListener('click', async () => {
   const password = newPassInput.value;
   
   // check password strength
-  const isPasswordVerified = passwordCheck(password.value, msgBox);
+  const isPasswordVerified = passwordCheck(password, msgBox);
   if (!isPasswordVerified) {
     return
   }

@@ -44,7 +44,7 @@ def send_email_verification(email, link, username):
                         <tr>
                             <td style="padding: 40px 30px;">
                                 <h2 style="margin: 0 0 20px 0; color: #00ff88; font-size: 24px; text-shadow: 0 0 15px #00ff88;">
-                                    <span>Hello {username}</span>Welcome to Neon App! 🎉
+                                    <span>Hello {username}!</span>  Welcome to Neon App! 🎉
                                 </h2>
                                 
                                 <p style="margin: 0 0 25px 0; color: #b8c5d6; font-size: 16px; line-height: 1.6;">
