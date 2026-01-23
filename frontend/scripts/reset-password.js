@@ -12,12 +12,13 @@ const newPassInput = document.getElementById('new-pass');
 const resetResult = document.getElementById('reset-result');
 
 const urlParams = new URLSearchParams(window.location.search);
+const token_id = urlParams.get('token_id');
 const token = urlParams.get('token');
 const msgBox = document.getElementById('reset-result');
 console.log(msgBox);
 
 // If token exists in URL, show password reset section
-if (token) {
+if (token && token_id) {
   newPassSection.style.display = 'block';
   emailInput.parentElement.style.display = 'none';
   sendBtn.style.display = 'none';
@@ -72,10 +73,10 @@ resetSubmit.addEventListener('click', async () => {
 
   try {
     const res = await dataSubmit(
-      { token, password },
+      { token_id, token, password },
       `${API_URL}/reset-password`
     );
-
+    console.log(res)
     if (!res.success) {
       showMessage(resetResult, res.data?.msg || 'Failed to reset password', 'error');
       return;

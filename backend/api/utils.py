@@ -111,7 +111,7 @@ def send_email_verification(email, link, username):
     </body>
     </html>
     """
-    print(f'Sending email to {username}')
+  
     result = send_email(msg)
     return result
     

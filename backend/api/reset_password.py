@@ -12,19 +12,26 @@ pass_reset = Blueprint('pass_reset', __name__)
 @pass_reset.route('/reset-password', methods=['POST'])
 def reset_password():
     data = request.get_json()
+    
+    token_id = data.get('token_id')
     token = data.get('token')
     new_password = data.get('password')
     
-    if not token or not new_password:
+    print(f"""
+    Token id : {token_id} \n 
+    Reset token {token} \n
+    """)
+    
+    if not token or not token_id or not new_password:
         return jsonify({'msg':'Missing token or password'}), 400
     elif len(new_password) < 8:
       return jsonify({'msg': 'Password should be greater than 8 characters!'}), 400
     # ADD PASSWORD STRENGTH ENFORCEMENT
     
     # Find user by reset token
-    user = User.query.filter_by(reset_token=token).first()
+    user = User.query.filter_by(reset_token_id=token_id).first()
     
-    if not user:
+    if not user or not user.check_reset_token(token):
         return jsonify({'msg':'Invalid reset link', 'error':'invalid'}), 400
     
     # Check if token expired
