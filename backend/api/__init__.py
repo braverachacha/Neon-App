@@ -13,11 +13,13 @@ from .protected_route import protect
 from .auth.forgot_password import forgot
 from .auth.login import login_bp
 from .auth.reset_password import pass_reset
+from .views import view
 from .auth.verify_email import email_app
+from .auth.resend_link import resend_link_bp
 
 import os
 
-load_dotenv()
+load_dotenv() 
 
 def create_app():
     app = Flask(__name__)
@@ -58,7 +60,7 @@ def create_app():
     JWTManager(app)
     mail.init_app(app)
     
-    blueprints = [alive, reg, protect, forgot, login_bp, pass_reset, email_app,]
+    blueprints = [alive, reg, protect, forgot, login_bp, pass_reset, email_app, view, resend_link_bp]
     
     for bp in blueprints:
       app.register_blueprint(bp)

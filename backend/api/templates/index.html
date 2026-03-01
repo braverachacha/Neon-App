@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    
+    <!-- Font Awesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>NeonApp | Home</title>
+    <style>
+      /* Smooth transition for theme toggle */
+      body, header, footer, main, section {
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+    </style>
+  </head>
+  <body class="bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100">
+    <div class="container mx-auto">
+      <!-- Header -->
+      <header class="bg-black text-cyan-600 py-4 px-2 flex justify-between items-center">
+        <h1 class="text-3xl font-bold">NeonApp Backend</h1>
+        <a href="https://neon-app-two.vercel.app" target="_blank" class="bg-cyan-600 text-black px-3 py-1 rounded">
+          Visit Site
+        </a>
+      </header>
+      
+      <!-- Hero Section -->
+      <main class="py-12 px-4 text-center">
+        <h2 class="text-4xl font-bold mb-4">JWT Auth & API Architecture</h2>
+        <p class="max-w-xl mx-auto mb-6">
+          NeonApp is a decoupled backend focused on <strong>JWT Authentication</strong>, 
+          <strong>SMTP integration</strong>, and <strong>secure API design</strong>. 
+          Built with Flask, SQLAlchemy, and Flask-Mail.
+        </p>
+        <a href="https://neon-app-two.vercel.app"  target="_blank" class="bg-cyan-600 text-black px-6 py-2 rounded font-semibold">Live Demo</a>
+      </main>
+      
+      <!-- About Section -->
+      <section class="px-6 py-10">
+        <h3 class="text-2xl font-semibold mb-4">About NeonApp Backend</h3>
+        <p>
+          The backend provides user authentication and authorization using JWT, 
+          email verification via SMTP, and flexible database support (SQLite for dev, PostgreSQL for production).
+        </p>
+      </section>
+      
+      <!-- Endpoints -->
+      <section id="endpoints" class="px-6 py-10">
+        <h3 class="text-2xl font-semibold mb-4">API Endpoints</h3>
+        <ul class="list-disc list-inside">
+          <li><code>POST /auth/register</code> – Register a new user</li>
+          <li><code>POST /auth/login</code> – Authenticate and get JWT</li>
+          <li><code>POST /auth/forgot-password</code> – Request password reset</li>
+          <li><code>POST /auth/verify-email</code> – Verify account via email</li>
+        </ul>
+      </section>
+      
+      <!-- Contact Form -->
+      <section class="px-6 py-10">
+        <h3 class="text-2xl font-semibold mb-4">Contact Us</h3>
+        <form class="max-w-md mx-auto space-y-4">
+          <input type="email" placeholder="Your Email" class="w-full px-3 py-2 border rounded" required>
+          <textarea placeholder="Your Message" class="w-full px-3 py-2 border rounded" rows="4"></textarea>
+          <button type="submit" class="bg-cyan-600 text-black px-6 py-2 rounded font-semibold">Send</button>
+        </form>
+      </section>
+      
+      <!-- Footer -->
+      <footer class="bg-black text-cyan-600 py-6 px-4 flex justify-between items-center">
+        <p>By ♥ BraveraTech ♥</p>
+        <div class="space-x-4">
+          <a href="https://wa.me/+254732994872?text=Hi%20BraveraTech%20can%20you%20tell%20me%20more%20about%20neonapp" target="_blank" class="hover:text-white">
+            <i class="fab fa-whatsapp fa-lg"></i></a>
+          <a href="#" class="hover:text-white"><i class="fab fa-tiktok fa-lg"></i></a>
+          <a href="mailto:neonapp.official@gmail.com?subject=NeonApp%20Inquiry&body=Hi%20BraveraTech%2C%20can%20you%20tell%20me%20more%20about%20NeonApp" class="hover:text-white">
+          <i class="fas fa-envelope fa-lg"></i></a>
+        </div>
+      </footer>
+    </div>
+    
+  </body>
+</html>

@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="./styles/verify.css">
   <title>Email Verification</title>
+  <style>
+    button{
+      border: none;
+    }
+  </style>
 </head>
 <body>
   <div class="container" id="container">
@@ -27,26 +32,28 @@
     <div id="expired" class="state" style="display: none;">
       <h1>⏳ Token Expired</h1>
       <p>Your verification link has expired. Please request a new verification email.</p>
-      <a href="/login.html" class="btn">Go to Login</a>
+      <button href="/login.html" class="btn js-resend">Request a New Link</button>
     </div>
 
     <!-- Invalid Token State -->
     <div id="invalid" class="state" style="display: none;">
       <h1>❌ Invalid Token</h1>
       <p>The verification link is invalid. Please make sure you used the correct link.</p>
-      <a href="/login.html" class="btn">Go to Login</a>
+      <button class="btn js-resend">Request a New Token</button>
     </div>
 
     <!-- Error State -->
     <div id="error" class="state" style="display: none;">
       <h1>❌ Verification Failed</h1>
       <p id="error-message">An error occurred during verification.</p>
-      <a href="/register.html" class="btn">Back to Register</a>
+      <button class="btn js-retry">Retry Again</button>
     </div>
 
   </div>
 
   <script type="module" src="scripts/verify.js"></script>
+  
   <script type="module" src="./scripts/keepAlive.js"></script>
+  
 </body>
 </html>
