@@ -1,22 +1,26 @@
+---
 # NeonApp | Backend & Auth Study
+---
 
 A decoupled Full-Stack application focused on **JWT Authentication**, **SMTP integration**, and **API Architecture**.
 
-## 🚀 Key Features
+##  Key Features
+--- 
 * **Stateless Auth:** Implemented via **JSON Web Tokens (JWT)**.
 * **Email Verification:** Full account activation flow using **Flask-Mail (SMTP)**.
 * **Database Agnostic:** Configured for **SQLite** (Dev) and **PostgreSQL** (Prod).
 * **Decoupled Design:** Flask is used strictly as a REST API (no Jinja2/Static rendering).
 
-## 🛠️ Tech Stack
+## ️ Tech Stack
+----
+
 * **Backend:** Python / Flask / SQLAlchemy
 * **Security:** PyJWT / Flask-JWT-Extended
 * **Mailing:** Flask-Mail (TLS)
 * **Environment:** Managed via `.env` (Database toggles & SMTP keys)
 
----
-
 ## Quick Start
+---
 
 1. **Setup Environment (.env):**
 
@@ -47,5 +51,5 @@ pip install -r requirements.txt
 python app.py
 ````
 ----
-By ♥BraveraTech♥ 
+© All rights reserved. 2026  `♥BraveraTech♥`
 ----
