@@ -1,1 +1,1 @@
-export const API_URL = 'https://measureless-supergenerically-sunday.ngrok-free.dev';
+export const API_URL = 'https://neonapp.ngrok.io';
