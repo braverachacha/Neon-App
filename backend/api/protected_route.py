@@ -1,5 +1,6 @@
 from flask import Blueprint
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from flask import jsonify
 
 protect = Blueprint('protect', __name__)
 
