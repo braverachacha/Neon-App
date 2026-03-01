@@ -7,6 +7,15 @@ from flask_mail import Mail
 
 from sqlalchemy_utils import database_exists, create_database
 
+#  Blueprints
+from .alive import alive
+from .register import reg
+from .protected_route import protect
+from .forgot_password import forgot
+from .login import login_bp
+from .reset_password import pass_reset
+from .verify_email import email_app
+
 import os
 
 db = SQLAlchemy()
@@ -53,21 +62,10 @@ def create_app():
     JWTManager(app)
     mail.init_app(app)
     
-    from .alive import alive
-    from .register import reg
-    from .protected_route import protect
-    from .forgot_password import forgot
-    from .login import login_bp
-    from .reset_password import pass_reset
-    from .verify_email import email_app
+    blueprints = [alive, reg, protect, forgot, login_bp, pass_reset, email_app,]
     
-    app.register_blueprint(alive)
-    app.register_blueprint(reg)
-    app.register_blueprint(protect)
-    app.register_blueprint(forgot)
-    app.register_blueprint(login_bp)
-    app.register_blueprint(pass_reset)
-    app.register_blueprint(email_app)
+    for bp in blueprints:
+      app.register_blueprint(bp)
     
     init_db(app)
 

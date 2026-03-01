@@ -38,7 +38,7 @@ def register():
     # GENERATE TOKEN & TOKEN ID
     token = generate_email_token()
     token_id = secrets.token_urlsafe(8)
-    expiry_time = datetime.utcnow() + timedelta(minutes=15)
+    expiry_time = datetime.utcnow() + timedelta(minutes=5)
     
 
     # CREATE USER OBJECT

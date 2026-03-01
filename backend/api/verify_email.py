@@ -11,7 +11,7 @@ def verify_email():
     response = request.get_json()
     
     token_id = response.get('token_id')
-    token =response.get('token')
+    token = response.get('token')
     
     if not token_id or not token:
       return jsonify({'msg':'Missing verification credentials!'}), 400
@@ -31,6 +31,7 @@ def verify_email():
     # Mark as verified and clear token
     user.is_verified = True
     user.email_token = None
+    user.email_token_id = None
     user.email_token_expiry = None
     db.session.commit()
     
