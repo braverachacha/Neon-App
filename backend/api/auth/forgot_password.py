@@ -2,9 +2,9 @@ from flask import Blueprint, jsonify, request, current_app
 from datetime import datetime, timedelta
 import secrets
 
-from .models import User
-from . import db 
-from .utils import generate_email_token, send_email_verification, send_password_reset_email
+from ..models import User
+from ..extensions import db
+from ..utils import generate_email_token, send_password_reset_email
 
 from .password_check import check_password
 
@@ -34,6 +34,5 @@ def forgot_password():
     reset_link = f"{frontend_url}/forgot-password.html?token_id={token_id}&token={token}"
     send_password_reset_email(email, reset_link)
     
-    print(reset_link)
     
     return jsonify({'msg': 'Password reset link sent to your email'}), 200

@@ -1,8 +1,8 @@
 from flask import Blueprint, jsonify, request
 from datetime import datetime, timedelta
 
-from .models import User
-from . import db 
+from ..models import User
+from ..extensions import db 
 
 email_app = Blueprint('email_app', __name__)
 

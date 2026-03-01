@@ -1,9 +1,9 @@
 from flask import Blueprint, jsonify, request
 from datetime import datetime
 
-from .models import User
-from . import db 
-from .utils import generate_email_token, send_email_verification, send_password_reset_email
+from ..models import User
+from ..extensions import db 
+from ..utils import generate_email_token, send_email_verification, send_password_reset_email
 
 from .password_check import check_password
 

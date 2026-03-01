@@ -3,23 +3,19 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_jwt_extended import JWTManager
 from dotenv import load_dotenv
 from flask_cors import CORS
-from flask_mail import Mail
-
+from .extensions import db, mail
 from sqlalchemy_utils import database_exists, create_database
 
 #  Blueprints
 from .alive import alive
-from .register import reg
+from .auth.register import reg
 from .protected_route import protect
-from .forgot_password import forgot
-from .login import login_bp
-from .reset_password import pass_reset
-from .verify_email import email_app
+from .auth.forgot_password import forgot
+from .auth.login import login_bp
+from .auth.reset_password import pass_reset
+from .auth.verify_email import email_app
 
 import os
-
-db = SQLAlchemy()
-mail = Mail()
 
 load_dotenv()
 

@@ -1,14 +1,12 @@
 from flask import Blueprint, jsonify, request, current_app
-from .utils import generate_email_token
-from .password_check import check_password
+
 from datetime import datetime, timedelta
 import secrets
 
-from .models import User
-
-from .utils import generate_email_token, send_email_verification, send_password_reset_email
-
-from . import db
+from ..models import User
+from ..utils import generate_email_token, send_email_verification, send_password_reset_email
+from ..extensions import db
+from .password_check import check_password
 
 reg = Blueprint('reg', __name__) 
 
