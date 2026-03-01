@@ -16,7 +16,7 @@ def resend_link():
     token_id = request_data.get('token_id')
 
     if not token_id:
-        return jsonify{'msg': 'Invalid request'}, 400
+        return jsonify({'msg': 'Invalid request'}), 400
 
     user = User.query.filter_by(email_token_id=token_id).first()
 
