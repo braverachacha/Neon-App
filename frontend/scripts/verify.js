@@ -18,7 +18,7 @@ function showState(state) {
   error.style.display = 'none';
 
   // Show the requested state
-  const element = document.getElementById(state);
+  const element = document.getElementById('state');
   if (element) {
     element.style.display = 'block';
   }
@@ -39,12 +39,7 @@ if (!token || !token_id) {
 }
 
 // Prepare data
-const details = {
-  token_id: token_id,
-  token: token
-};
-
-console.log(details)
+const details = {token, token_id};
 
 // Set initial state
 showState('loading');
@@ -79,7 +74,6 @@ async function verifyEmail(details) {
     }
     
     const data = await res.json();
-    console.log('Response data:', data);
 
     if (data.success) {
       showState('success');
@@ -104,4 +98,27 @@ async function verifyEmail(details) {
       }
     }
   }
+}
+
+// Verification retry 
+const retryButton = document.querySelector('.js-retry');
+
+if (retryButton) {
+  retryButton.addEventListener('click', async () => {
+    
+    // Validate parameters again
+    
+    if (!token_id || !token) {
+      showState('invalid');
+      if (errorMessage) errorMessage.textContent = 'Invalid or missing security tokens.';
+      return;
+    }
+
+    // Set loading
+    showState('loading');
+
+    //Re-run the existing verification logic
+    
+    await verifyEmail(details);
+  });
 }
