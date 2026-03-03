@@ -1,4 +1,5 @@
 import { API_URL } from './config.js';
+import { dataSubmit } from './dataFetch.js';
 
 // Get all state elements
 const loading = document.getElementById('loading');
@@ -6,6 +7,7 @@ const success = document.getElementById('success');
 const expired = document.getElementById('expired');
 const invalid = document.getElementById('invalid');
 const error = document.getElementById('error');
+const resent = document.getElementById('resent');
 const errorMessage = document.getElementById('error-message');
 
 // Function to show state
@@ -16,9 +18,10 @@ function showState(state) {
   expired.style.display = 'none';
   invalid.style.display = 'none';
   error.style.display = 'none';
+  resent.style.display = 'none';
 
   // Show the requested state
-  const element = document.getElementById('state');
+  const element = document.getElementById(state);
   if (element) {
     element.style.display = 'block';
   }
@@ -36,6 +39,7 @@ const token = params.get("token");
 if (!token || !token_id) {
   showState('error');
   if (errorMessage) errorMessage.textContent = 'Missing verification parameters.';
+  // return;
 }
 
 // Prepare data
@@ -55,7 +59,7 @@ async function verifyEmail(details) {
       'Accept': 'application/json'
     };
     
-    console.log('Sending verification request:', details);
+    console.log('Sending verification request');
     
     const res = await fetch(`${API_URL}/verify-email`, {
       method: 'POST',
@@ -117,8 +121,52 @@ if (retryButton) {
     // Set loading
     showState('loading');
 
-    //Re-run the existing verification logic
+    //Re-run verification logic
     
     await verifyEmail(details);
+  });
+}
+
+// EMAIL VERIFICATION LINK RESEND
+
+const resendButton = document.querySelector('.js-resend');
+
+if (resendButton) {
+  resendButton.addEventListener('click', async () => {
+
+    if (!token_id) {
+      showState('invalid');
+      return;
+    }
+
+    showState('loading');
+
+    const details = { token_id };
+    const url = `${API_URL}/resend-link`;
+
+    try {
+      const response = await dataSubmit(details, url);
+
+      if (response.success) {
+        showState('resent');
+
+        setTimeout(() => {
+          window.location.href = '/login.html';
+        }, 3000);
+
+      } else {
+        showState('error');
+        if (errorMessage) {
+          errorMessage.textContent = response.data.msg || 'Failed to resend link';
+        }
+      }
+
+    } catch (err) {
+      showState('error');
+      if (errorMessage) {
+        errorMessage.textContent = 'Network error. Please try again.';
+      }
+    }
+
   });
 }

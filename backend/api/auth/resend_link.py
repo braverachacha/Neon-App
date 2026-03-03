@@ -28,19 +28,19 @@ def resend_link():
         token = generate_email_token()
         token_id = secrets.token_urlsafe(8)
 
-        frontend_url = current_app.config['FRONTEND_URL'].rstrip('/')
+        frontend_url = current_app.config['FRONTEND_LINK'].rstrip('/')
 
         link = f"{frontend_url}/verify.html?token_id={token_id}&token={token}"
 
         user.set_email_token(token) # hash the token 
         user.email_token_id = token_id
-        user.email_token_expiry = datetime.utcnow() + timedelta(minutes=15) # 15 minutes
+        user.email_token_expiry = datetime.utcnow() + timedelta(minutes=1)
         user.is_verified = False
 
         db.session.commit()
 
         # send the email verification link to the user
-        send_email_verification(email, username, link)
+        send_email_verification(email, link, username)
 
     return jsonify({'msg': 'If the user exists, the email verification link have been sent successfully.'}), 200
     

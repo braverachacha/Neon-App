@@ -38,8 +38,8 @@
     <!-- Invalid Token State -->
     <div id="invalid" class="state" style="display: none;">
       <h1>❌ Invalid Token</h1>
-      <p>The verification link is invalid. Please make sure you used the correct link.</p>
-      <button class="btn js-resend">Request a New Token</button>
+      <p>Invalid or missing security tokens.</p>
+      <a href="register.html" class="btn">Register New Account</a>
     </div>
 
     <!-- Error State -->
@@ -47,6 +47,14 @@
       <h1>❌ Verification Failed</h1>
       <p id="error-message">An error occurred during verification.</p>
       <button class="btn js-retry">Retry Again</button>
+    </div>
+    
+    <!-- success resend State -->
+    <div id="resent" class="state" style="display: block;">
+      <h1>Sent successfully</h1>
+      <p>The email verification link have been resent successfully</p>
+      <button class="btn js-retry">Redirecting to login...
+      </button>
     </div>
 
   </div>

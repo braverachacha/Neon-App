@@ -24,6 +24,10 @@ body.success {
   background: linear-gradient(135deg, #0a0e27 0%, #0d3d2d 100%);
 }
 
+body.resent {
+  background: linear-gradient(135deg, #0a0e27 0%, #0d3d2d 100%);
+}
+
 body.expired {
   background: linear-gradient(135deg, #0a0e27 0%, #3d0d1f 100%);
 }
@@ -77,6 +81,11 @@ h1 {
 }
 
 #success h1 {
+  color: #00ff88;
+  text-shadow: 0 0 20px #00ff88, 0 0 40px #00ff88;
+}
+
+#resent h1 {
   color: #00ff88;
   text-shadow: 0 0 20px #00ff88, 0 0 40px #00ff88;
 }
@@ -141,6 +150,12 @@ body.loading .btn {
 }
 
 #success .btn,
+body.success .btn {
+  background: #00ff88;
+  box-shadow: 0 0 20px #00ff88, 0 0 40px rgba(0, 255, 136, 0.3);
+}
+
+#resent .btn,
 body.success .btn {
   background: #00ff88;
   box-shadow: 0 0 20px #00ff88, 0 0 40px rgba(0, 255, 136, 0.3);
